@@ -1,0 +1,70 @@
+server:
+  port: ${SERVER_PORT:8080}
+  shutdown: graceful
+  tomcat:
+    threads:
+      max: 2000
+    mbeanregistry:
+      enabled: true
+    connection-timeout: ${TOMCAT_CONNECTION_TIMEOUT:50000}
+    max-keep-alive-requests: ${TOMCAT_MAX_KEEP_ALIVE_REQUESTS:60000}
+    keep-alive-timeout: ${TOMCAT_KEEP_ALIVE_TIMEOUT:60000}
+  servlet:
+    context-path: /v1/api
+spring:
+  main:
+    web-application-type: servlet
+    lazy-initialization: true
+  jackson:
+    default-property-inclusion: NON_NULL
+    serialization:
+      fail-on-empty-beans: false
+      write-dates-as-timestamps: false
+      write-dates-with-context-time-zone: true
+    deserialization:
+      fail-on-unknown-properties: false
+      fail-on-numbers-for-enums: false
+  lifecycle:
+    timeout-per-shutdown-phase: ${SHUTDOWN_LISTENER_WAIT_SECONDS:30}s
+  application:
+    name: keasybdd-spring-app
+  threads:
+    virtual:
+      enabled: true
+  okhttp:
+    connect-timeout-mills: ${OKHTTP_CONNECT_TIMEOUT_MILLS:5000}
+    read-timeout-mills: ${OKHTTP_READ_TIMEOUT_MILLS:5000}
+    write-timeout-mills: ${OKHTTP_WRITE_TIMEOUT_MILLS:5000}
+    max-idle-connections: ${OKHTTP_MAX_IDLE_CONNECTIONS:6000}
+    keep-alive-duration: ${OKHTTP_KEEP_ALIVE_DURATION:60000}
+  proxy:
+    url: ${PROXY_URL:http://localhost:8080/v1/api/exchange}
+---
+management:
+  metrics:
+    tags:
+      app: ${spring.application.name}
+    distribution:
+      percentiles:
+        http.server.requests: 0.5, 0.95
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    prometheus:
+      enabled: true
+    metrics:
+      enabled: true
+      expoort:
+        prometheus:
+          enabled: true
+    health:
+      show-details: always
+      probes:
+        enabled: true
+      group:
+        readiness:
+          include: "readinessState"
+        liveness:
+          include: "livenessState"

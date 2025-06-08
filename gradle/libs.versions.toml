@@ -1,0 +1,91 @@
+# Version catalog is a central place for you to declare and version dependencies
+# https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
+# https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
+
+[versions]
+kotlin = "2.1.20"
+ktlint = "12.3.0"
+dokka = "2.0.0"
+lombok = "2.0.20"
+freefair = "8.13.1"
+arrow = "1.2.4"
+kotlinxDatetime = "0.6.1"
+kotlinxSerializationJSON = "1.7.3"
+kotlinxCoroutines = "1.9.0"
+disruptor = "4.0.0"
+slf4j = "2.0.17"
+log4j = "2.24.3"
+javaxAnnotationApi = "1.3.2"
+jsr305 = "3.0.2"
+junit5 = "1.10.5"
+jupiter = "5.12.2"
+mockito = "5.13.0"
+awaitility = "4.2.2"
+fasterxml = "2.19.0"
+dreamhead = "1.5.0"
+okhttp3 = "5.0.0-alpha.16"
+javacrumbs = "4.1.0"
+guava = "33.4.7-jre"
+gson = "2.10.1"
+cucumber = "7.22.2"
+reporting = "5.8.4"
+depmgt = "1.1.7"
+spring = "3.5.0"
+
+
+[libraries]
+kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+ktlintGradlePlugin = { module = "org.jlleitschuh.gradle.ktlint:org.jlleitschuh.gradle.ktlint.gradle.plugin", version.ref = "ktlint" }
+dokkaGradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
+lombokGradlePlugin = { module = "org.jetbrains.kotlin.plugin.lombok:org.jetbrains.kotlin.plugin.lombok.gradle.plugin", version.ref = "lombok" }
+freefairGradlePlugin = { module = "io.freefair.gradle:lombok-plugin", version.ref = "freefair" }
+depMgtGradlePlugin = { module = "io.spring.dependency-management:io.spring.dependency-management.gradle.plugin", version.ref = "depmgt" }
+springGradlePlugin = { module = "org.springframework.boot:org.springframework.boot.gradle.plugin", version.ref = "spring" }
+kotlinxDatetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+kotlinxSerialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJSON" }
+kotlinxCoroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+arrowCore = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
+arrowFxCoroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrow" }
+javaxAnnotationApi = { module = "javax.annotation:javax.annotation-api", version.ref = "javaxAnnotationApi" }
+findbugs = { group = "com.google.code.findbugs", name = "jsr305", version.ref = "jsr305" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+gson  = { module = "com.google.code.gson:gson", version.ref = "gson" }
+disruptor = { group = "com.lmax", name = "disruptor", version.ref = "disruptor" }
+slf4jApi = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+log4jApi = { module = "org.apache.logging.log4j:log4j-api", version.ref = "log4j" }
+log4jSlf4j2Impl = { module = "org.apache.logging.log4j:log4j-slf4j-impl", version.ref = "log4j" }
+junitPlatformSuite = { module = "org.junit.platform:junit-platform-suite", version.ref = "junit5" }
+junitJupiterParams = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "jupiter" }
+junitJupiterEngine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jupiter" }
+mockitoJunitJupiter = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockito" }
+awaitility = { module = "org.awaitility:awaitility", version.ref = "awaitility" }
+jacksonDatabind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "fasterxml" }
+jacksonJsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "fasterxml" }
+jacksonYaml = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml", version.ref = "fasterxml" }
+jacksonKotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "fasterxml" }
+mocoCore = { module = "com.github.dreamhead:moco-core", version.ref = "dreamhead" }
+mocoRunner = { module = "com.github.dreamhead:moco-runner", version.ref = "dreamhead" }
+jsonUnit = { module = "net.javacrumbs.json-unit:json-unit", version.ref = "javacrumbs" }
+jsonUnitCore = { module = "net.javacrumbs.json-unit:json-unit-core", version.ref = "javacrumbs" }
+cucumberJava = { module = "io.cucumber:cucumber-java", version.ref = "cucumber" }
+cucumberSpring = { module = "io.cucumber:cucumber-spring", version.ref = "cucumber" }
+cucumberJunit = { module = "io.cucumber:cucumber-junit-platform-engine", version.ref = "cucumber" }
+cucumberReporting = { module = "net.masterthought:cucumber-reporting", version.ref = "reporting" }
+okhttp3 = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp3" }
+okhttp3LoggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp3" }
+
+# Libraries can be bundled together for easier import
+[bundles]
+kotlinxEcosystem = ["kotlinxDatetime", "kotlinxSerialization", "kotlinxCoroutines"]
+arrowEcosystem = ["arrowCore", "arrowFxCoroutines"]
+log4j2Ecosystem = ["slf4jApi", "log4jApi", "log4jSlf4j2Impl", "disruptor"]
+junit5Ecosystem = ["junitPlatformSuite", "junitJupiterParams", "junitJupiterEngine", "mockitoJunitJupiter", "awaitility"]
+jacksonEcosystem = ["jacksonDatabind", "jacksonYaml", "jacksonJsr310", "jacksonKotlin"]
+javacrumbsEcosystem = ["jsonUnit", "jsonUnitCore"]
+dreamheadEcosystem = ["mocoCore", "mocoRunner"]
+cucumberEcosystem = ["cucumberJava", "cucumberSpring", "cucumberJunit", "cucumberReporting"]
+okHttp3Ecosystem = ["okhttp3", "okhttp3LoggingInterceptor"]
+
+[plugins]
+kotlinPluginSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
