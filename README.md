@@ -13,7 +13,7 @@ Kotlin Easy BDD library.
 
 ## Usage
 
-Please check out this repo, and try to fix the above failed BDD scenarios.
+Please check out this repo, and try to run the above BDD scenarios.
 
 ## Changelog
 

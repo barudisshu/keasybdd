@@ -148,23 +148,29 @@ public abstract class MockAbstractHttpService : MockHttpService {
     val headers = bufferRequest.headers
     val sessionId = headers[SESSION_CORRELATION_ID]
     val requestId = headers[REQUEST_CORRELATION_ID]
-    sessionId?.also {
+    if (sessionId != null) {
       sessionIds[endpoint] = sessionId
     }
-    requestId?.also {
+    if (requestId != null) {
       requestIds[endpoint] = requestId
     }
     if (httpRequest is MockDefaultHttpRequest) {
       val replacedBody = httpRequest.body
       if (replacedBody != null) {
-        httpRequest.body =
-          replacedBody
-            .replace(SESSION_CORRELATION_ID_FLAG, sessionIds[endpoint]!!)
-            .replace(REQUEST_CORRELATION_ID_FLAG, requestIds[endpoint]!!)
+        if (sessionIds[endpoint] != null) {
+          httpRequest.body = replacedBody.replace(SESSION_CORRELATION_ID_FLAG, sessionIds[endpoint]!!)
+        }
+        if (requestIds[endpoint] != null) {
+          httpRequest.body = replacedBody.replace(REQUEST_CORRELATION_ID_FLAG, requestIds[endpoint]!!)
+        }
       }
     }
-    httpRequest?.headers?.set(SESSION_CORRELATION_ID, sessionIds[endpoint]!!)
-    httpRequest?.headers?.set(REQUEST_CORRELATION_ID, requestIds[endpoint]!!)
+    if (sessionIds[endpoint] != null) {
+      httpRequest?.headers?.set(SESSION_CORRELATION_ID, sessionIds[endpoint]!!)
+    }
+    if (requestIds[endpoint] != null) {
+      httpRequest?.headers?.set(REQUEST_CORRELATION_ID, requestIds[endpoint]!!)
+    }
 
     replaceLocalHostWithRealIp(httpRequest)
     replaceLocalHostWithRealIp(bufferRequest)

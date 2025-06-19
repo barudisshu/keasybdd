@@ -14,7 +14,7 @@ Feature: 01 - HTTP Proxy
     "secret": "I'm handsome"
     }
     """
-    Given HTTP_CLIENT "K8S" send the http request
+    Given HTTP_CLIENT "service-client" send the http request
     Then HTTP_SERVER "service-proxy" receive request
     """json
     {
